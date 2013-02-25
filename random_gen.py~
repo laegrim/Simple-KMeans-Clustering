@@ -2,8 +2,8 @@ import random
 
 output_file = open('input.txt', 'w')
 random.seed()
-rand_range = range(1000)
-numb_enter = range(500)
+rand_range = range(30000)
+numb_enter = range(15000)
 
 for i in numb_enter:
 	j = random.choice(rand_range)

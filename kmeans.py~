@@ -5,7 +5,7 @@ import random
 #Function: float distance(tuple, tuple)
 ###############################################
 def distance(tuple1, tuple2):
-	if (type(tuple1) != tuple or type(tuple2)!= tuple)
+	if (type(tuple1) != tuple or type(tuple2) != tuple):
 		log_file.write("Some data might be corrupted \n")
 		return 0
 	if len(tuple1) == len(tuple2):
