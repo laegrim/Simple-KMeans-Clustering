@@ -5,10 +5,10 @@ import random
 #Function: float distance(tuple, tuple)
 ###############################################
 def distance(tuple1, tuple2):
-	if (type(tuple1) == int or type(tuple2) == int):
-		print tuple1
-		print tuple2
-	elif len(tuple1) == len(tuple2):
+	if (type(tuple1) != tuple or type(tuple2) != tuple):
+		log_file.write("Some data might be corrupted \n")
+		return 0
+	if len(tuple1) == len(tuple2):
 		return sum(pow(tuple1[i] - tuple2[i], 2) for i in range(len(tuple1)))
 	else:
 		return 0
@@ -59,6 +59,7 @@ clusters = [[] for i in range(k)]
 
 #parse the file for x and y coordinates
 for line in input_file:
+	line = line.encode(encoding='UTF-8', errors='strict')
 	data = line.split(' ')
 
 	try:
@@ -82,7 +83,7 @@ while (changed == 1):
 	changed = 0
 	means = []
 	random.seed()
-	print "Means: " + str(means) + '\n'
+	#print "Means: " + str(means) + '\n'
 	
 	if iteration == 0:
 		#while there isn't a mean for each cluster
@@ -104,8 +105,8 @@ while (changed == 1):
 				
 			#update loop status to reflect that a coordinate changed cluster membership
 			changed = 1
-			print "Transferred random starting mean " + str(pick) + " from cluster 0 " + \
-			" to cluster " + str(len(means) - 1) + '\n'
+			#print "Transferred random starting mean " + str(pick) + " from cluster 0 " + \
+			#" to cluster " + str(len(means) - 1) + '\n'
 			
 	elif iteration > 0:
 		for cluster in clusters:
@@ -131,13 +132,13 @@ while (changed == 1):
 				clusters[means.index(means[mean_index])].append(cluster.pop(cluster.index(coord)))
 				#update loop status to reflect that a coordinate changed cluster membership
 				changed = 1
-				print "Transferred point " + str(coord) + " from cluster " + str(clusters.index(cluster)) + \
-				" to cluster " + str(means.index(means[mean_index])) + '\n'
+				#print "Transferred point " + str(coord) + " from cluster " + str(clusters.index(cluster)) + \
+				#" to cluster " + str(means.index(means[mean_index])) + '\n'
 	
-	print "Changed: " + str(changed) + '\n'
-	print "Iteration: " + str(iteration) + '\n'
-	print "Means: " + str(means) + '\n'
-	print "Clusters: " + str(clusters) + '\n'
+	#print "Changed: " + str(changed) + '\n'
+	#print "Iteration: " + str(iteration) + '\n'
+	#print "Means: " + str(means) + '\n'
+	#print "Clusters: " + str(clusters) + '\n'
 	iteration = iteration + 1
 				
 for cluster in clusters:
